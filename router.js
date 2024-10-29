@@ -4,43 +4,59 @@ const router = express.Router();
 const conexion = require('./util/db')
 
 router.get('/', (req, res) => {
-    conexion.query('select * from clientes', function (err, results) {
-        if (err) {
-            throw err;
-        } else {
-            res.render('index', { results: results });
-        }
-    });
+    res.render('');
 });
 
-router.get('/create', (req, res) => {
-    res.render('create');
-})
+router.get('/editarProducto', (req, res) => {
+    res.render('editarProducto');
+});
 
-router.get('/edit/:id_cliente', (req, res) => {
-    const id_cliente = req.params.id_cliente;
-    conexion.query('select * from clientes where id_cliente=?', [id_cliente], (err, results) => {
-        if (err) {
-            throw err;
-        } else {
-            res.render('edit', { user: results[0] });
-        }
-    })
-})
+router.get('/editarCliente', (req, res) => {
+    res.render('editarCliente');
+});
 
-router.get('/delete/:id_cliente', (req, res) => {
-    const id_cliente = req.params.id_cliente;
-    conexion.query('delete from clientes where id_cliente = ?', [id_cliente], (err, results) => {
-        if (err) {
-            throw err;
-        } else {
-            res.redirect('/');
-        }
-    });
-})
+router.get('/listaClientes', (req, res) => {
+    res.render('listaClientes');
+});
 
-const crud = require('./controllers/crud');
-router.post('/save', crud.save);
-router.post('/update', crud.update);
+router.get('/listaPedidos', (req, res) => {
+    res.render('listaPedidos');
+});
+
+router.get('/listaProductos', (req, res) => {
+    res.render('listaProductos');
+});
+
+router.get('/register', (req, res) => {
+    res.render('register');
+});
+
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
+router.get('/detallesPedido', (req, res) => {
+    res.render('detallesPedido');
+});
+
+router.get('/clienteHistorial', (req, res) => {
+    res.render('clienteHistorial');
+});
+
+router.get('/clienteProductos', (req, res) => {
+    res.render('clienteProductos');
+});
+
+router.get('/detallesHistorial', (req, res) => {
+    res.render('detallesHistorial');
+});
+
+router.get('/vistaAdmin', (req, res) => {
+    res.render('vistaAdmin');
+});
+
+router.get('/crearProducto', (req, res) => {
+    res.render('crearProducto');
+});
 
 module.exports = router;
