@@ -1,16 +1,23 @@
-const express = require('express'); //Invocamos a express
-const app = express(); //Nos va a permitir usar todos los métodos de la libreria
+const express = require('express');
+const app = express();
 
-app.set('view engine', 'ejs'); //Indicamos el motor de plantilla que vamos a usar
+const auth = require('./routes/auth');
+const admin = require('./routes/admin');
+const cliente = require('./routes/cliente');
+
+app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
-app.use('/resources', express.static('public'));
-app.use('/resources', express.static(__dirname + 'public')); //Indicamos la ubicación del css
+app.get('/', (req, res) => {
+    res.render('');
+})
 
-app.use('/', require('./router'));
+app.use(auth, admin, cliente);
 
-app.listen(5000, ()=>{ //Nos permite ejecutarlo en el puerto 5000
+app.use('/public', express.static('./public'));
+
+app.listen(5000, ()=>{
     console.log('Servidor corriendo en http://localhost:5000')
 });
