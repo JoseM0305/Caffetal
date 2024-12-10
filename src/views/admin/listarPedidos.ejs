@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link rel="stylesheet" href="/public/admin/style.css">
+    <style>
+        table .acciones {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../partials/navAdmin') %>
+        <h1>Lista de Pedidos</h1>
+
+        <% if (pedidos.length===0) { %>
+            <p>No hay pedidos registrados.</p>
+            <% } else { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Pedido</th>
+                            <th>Usuario</th>
+                            <th>Monto Total</th>
+                            <th>Fecha de Creación</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% pedidos.forEach(pedido=> { %>
+                            <tr>
+                                <td>
+                                    <%= pedido.id %>
+                                </td>
+                                <td>
+                                    <%= pedido.usuario %>
+                                </td>
+                                <td>
+                                    S/<%= pedido.monto_total %>
+                                </td>
+                                <td>
+                                    <%= new Date(pedido.fecha_creacion).toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= pedido.estado %>
+                                </td>
+                                <td>
+                                    <div class="acciones">
+                                        <form action="/admin/pedidos/<%= pedido.id %>/cambiarEstado" method="POST">
+                                            <button class="green-btn" type="submit">Confirmar</button>
+                                        </form>
+                                        <a class="sky-btn" href="/admin/pedidos/<%= pedido.id %>">Ver Detalles</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+</body>
+
+</html>

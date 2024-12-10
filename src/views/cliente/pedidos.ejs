@@ -1,0 +1,101 @@
+<!-- En cliente/pedidos.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos</title>
+    <link rel="stylesheet" href="/public/cliente/style.css">
+    <style>
+        section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0F0C29;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        td {
+            font-size: 1rem;
+        }
+
+        table a {
+            text-decoration: none;
+            color: #4f91ff;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        table a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../partials/navCliente') %>
+        <h1>Mis Pedidos</h1>
+        <section>
+            <% if (pedidos.length===0) { %>
+                <p>
+                    <%= mensaje %>
+                </p>
+                <% } else { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>Fecha</th>
+                                <th>Monto Total</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% pedidos.forEach(pedido=> { %>
+                                <tr>
+                                    <td>
+                                        <%= pedido.id %>
+                                    </td>
+                                    <td>
+                                        <%= new Date(pedido.fecha_creacion).toLocaleDateString()  %>
+                                    </td>
+                                    <td>
+                                        S/<%= pedido.monto_total %>
+                                    </td>
+                                    <td>
+                                        <%= pedido.estado %>
+                                    </td>
+                                    <td>
+                                        <a href="/cliente/pedido/<%= pedido.id %>">Ver detalles</a>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                    <% } %>
+        </section>
+</body>
+
+</html>

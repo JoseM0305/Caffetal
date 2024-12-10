@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Pedido</title>
+    <link rel="stylesheet" href="/public/admin/style.css">
+</head>
+
+<body>
+    <%- include('../partials/navAdmin') %>
+        <h1>Detalles del Pedido</h1>
+
+        <% if (detalles.length===0) { %>
+            <p>No se encontraron productos para este pedido.</p>
+            <% } else { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% detalles.forEach(detalle=> { %>
+                            <tr>
+                                <td>
+                                    <%= detalle.nombre %>
+                                </td>
+                                <td>
+                                    <%= detalle.cantidad %>
+                                </td>
+                                <td>
+                                    S/<%= detalle.precio_unitario %>
+                                </td>
+                                <td>
+                                    S/<%= detalle.cantidad * detalle.precio_unitario %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+</body>
+
+</html>

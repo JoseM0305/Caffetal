@@ -1,20 +1,20 @@
 {
   "name": "caffetal",
   "version": "1.0.0",
-  "description": "Proyecto para el Curso Integrador 1",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "npm",
-    "javascript"
-  ],
-  "author": "José Mario",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "ejs": "^3.1.10",
-    "express": "^4.21.1",
-    "mysql": "^2.18.1"
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "mysql2": "^3.11.5"
   }
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="/public/admin/style.css">
+</head>
+
+<body>
+    <%- include('../partials/navAdmin') %>
+        <h1>Lista de Usuarios</h1>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Fecha de Creación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% usuarios.forEach(usuario=> { %>
+                    <tr>
+                        <td>
+                            <%= usuario.id %>
+                        </td>
+                        <td>
+                            <%= usuario.nombre %>
+                        </td>
+                        <td>
+                            <%= usuario.correo %>
+                        </td>
+                        <td>
+                            <%= usuario.rol %>
+                        </td>
+                        <td>
+                            <%= new Date(usuario.fechaCreacion).toLocaleDateString() %>
+                        </td>
+                        <td>
+                            <a class="yellow-btn" href="/admin/usuarios/editar/<%= usuario.id %>">Editar</a>
+                            <form action="/admin/usuarios/eliminar/<%= usuario.id %>" method="POST"
+                                style="display:inline;">
+                                <button class="red-btn" type="submit">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+</body>
+
+</html>

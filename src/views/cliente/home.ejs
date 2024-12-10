@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos Disponibles</title>
+    <link rel="stylesheet" href="/public/cliente/style.css">
+    <style>
+        .productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .producto {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .producto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .producto h3 {
+            font-size: 1.6rem;
+            color: #0F0C29;
+            margin-bottom: 10px;
+        }
+
+        .producto p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .producto form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .producto input[type="number"] {
+            padding: 8px;
+            font-size: 1rem;
+            width: 60px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .producto button {
+            background-color: #0F0C29;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .producto button:hover {
+            background-color: #4f91ff;
+        }
+
+        .producto p:last-child {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../partials/navCliente') %>
+    <h1>Lista de Productos</h1>
+    <div class="productos">
+        <% productos.forEach(function(producto) { %>
+            <div class="producto">
+                <h3><%= producto.nombre %></h3>
+                <p><%= producto.descripcion %></p>
+                <p>Precio: <%= producto.precio %> USD</p>
+                <p>Stock: <%= producto.stock %></p>
+
+                <form action="/cliente/carrito/agregar/<%= producto.id %>" method="POST">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" name="cantidad" value="1" min="1" max="<%= producto.stock %>" required>
+                    <button type="submit">Agregar al carrito</button>
+                </form>
+            </div>
+        <% }) %>
+    </div>
+</body>
+
+</html>

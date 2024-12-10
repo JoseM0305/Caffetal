@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+    <link rel="stylesheet" href="/public/admin/style.css">
+    <style>
+        .div-form {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        input,
+        select {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        button {
+            background-color: #4f91ff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0F0C29;
+        }
+
+        input[readonly] {
+            background-color: #f0f0f0;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../partials/navAdmin') %>
+        <h1>Editar Usuario</h1>
+        <div class="div-form">
+            <form action="/admin/usuarios/editar/<%= usuario.id %>" method="POST">
+                <label for="nombre">Nombre:</label>
+                <input type="text" name="nombre" id="nombre" value="<%= usuario.nombre %>" readonly>
+                <label for="correo">Correo:</label>
+                <input type="email" name="correo" id="correo" value="<%= usuario.correo %>" readonly>
+                <label for="rol">Rol:</label>
+                <select name="rol" id="rol" required>
+                    <option value="usuario" <%=usuario.rol==='usuario' ? 'selected' : '' %>>Usuario</option>
+                    <option value="admin" <%=usuario.rol==='admin' ? 'selected' : '' %>>Administrador</option>
+                </select>
+                <button type="submit">Guardar Cambios</button>
+            </form>
+        </div>
+
+</body>
+
+</html>

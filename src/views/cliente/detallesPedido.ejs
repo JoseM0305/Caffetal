@@ -1,0 +1,87 @@
+<!-- En cliente/detallesPedido.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Pedido</title>
+    <link rel="stylesheet" href="/public/cliente/style.css">
+    <style>
+        section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0F0C29;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        td {
+            font-size: 1rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td,
+        th {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../partials/navCliente') %>
+        <h1>Detalles del Pedido</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% detallesPedido.forEach(detalle=> { %>
+                    <tr>
+                        <td>
+                            <%= detalle.nombre %>
+                        </td>
+                        <td>
+                            <%= detalle.cantidad %>
+                        </td>
+                        <td>
+                            S/<%= detalle.precio_unitario %>
+                        </td>
+                        <td>
+                            S/<%= (detalle.cantidad * detalle.precio_unitario) %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+</body>
+
+</html>
